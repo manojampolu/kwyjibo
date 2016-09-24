@@ -30,6 +30,11 @@ SESSION_USERID = 'customer'
 fp_mongo = PyMongo(app, config_prefix='MONGO')
 env = Environment(app)
 
+@app.route('/', methods=['GET'])
+def hello():
+    return "Hi you have landed on a live wire."
+
+
 @app.route('/api/postAd', methods=['POST'])
 def register():
     #customer can initiall register here
@@ -82,3 +87,7 @@ def get_ad_for_location(data):
     except:
         print traceback.format_exc()
         return []
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
