@@ -53,7 +53,7 @@ class Encoder(json.JSONEncoder):
 
 @app.route('/', methods=['GET'])
 def hello():
-    return "Hi you have landed on a live wire."
+    return render_template('new-promo.html')
 
 
 @app.route('/api/postAd', methods=['POST'])
@@ -111,17 +111,18 @@ def get_ad_for_location(data):
         resp.update(get_weather(data.get('city')))
         resp.update(get_stock_updates())
         resp.update(get_gold_price())
+        resp.update(get_latest_scores())
     except:
         print traceback.format_exc()
     return resp
 
 def get_weather(location):
-    temp = {'weather': {'temp':30, 'condition':'Clear', 'wind_condition':'Wind: E at 16 mph', 'humidity':'Humidity: 59%'}}
+    temp = {'weather': {'temp':'34', 'condition':'Clear', 'wind_condition':'Wind: E at 16 mph', 'humidity':'Humidity: 59%'}}
+    return temp
     try:
-        API_URL = "http://www.google.com/ig/api?"
-        url = API_URL + urlencode({"weather": location})
-        xml = urlopen(url).read()
-        doc = minidom.parseString(xml)
+        API_URL = "http://www.google.com/api?w=chennai&u=india"
+        xml = urlopen(API_URL).read().decode('utf-8', 'ignore').strip()
+        doc = minidom.parseString(xml.encode('utf-8'))
         forecast_information = doc.documentElement.getElementsByTagName("forecast_information")[0]
         city = forecast_information.getElementsByTagName("city")[0].getAttribute("data")
 
@@ -159,7 +160,7 @@ def get_gold_price():
     SILVER_URL = "http://www.goldpriceindia.com/silver-price-india.php"
     comm = {'commodities': {"gold":30000, "silver":45000, "usdInr":65}}
     try:
-        goldResp = urlopen(URL).read()
+        goldResp = urlopen(GOLD_URL).read()
         gold = goldResp.split("Today gold price in India is")[1][:15].replace(' ', '').replace('<b>', '').replace('</b>', '')
         usdInr = goldResp.split("US Dollar <i>to Rupee")[1][:15].replace(' ', '').replace('<u>', '').replace('</i>', '').replace('</b>', '')
         silverResp = urlopen(SILVER_URL).read()
@@ -172,15 +173,29 @@ def get_gold_price():
     return comm
 
 def get_latest_news():
-    news = {'headlines':[]}
+    news = {'news':{}}
     try:
-        latest = urlopen("https://news.google.co.in/?edchanged=1&ned=ta_in&authuser=0").read()
-        latest = [i for i in re.findall('href="(.+?)"', latest) if i.startswith('http') and ('thanthi' in i or 'vikatan' in i or 'tamil' in i or 'dinamani' in i)][:5]
-        news['headlines'] = latest
+        latest = urlopen("http://timesofindia.indiatimes.com/rssfeedstopstories.cms").read()
+        latest = re.findall("<description>(.+?)</description>", latest)
+        news['news']['Top News'] = latest
+        regional = urlopen('http://feeds.feedburner.com/ns7/tamilnadunews?format=xml').read()
+        regional = re.findall("<title>(.+?)</title>", latest)
+        news['news']['Regional News'] = Regional
     except:
         print traceback.format_exc()
     return news
 
+def get_latest_scores():
+    score = {'Live Sports Feed':[]}
+    try:
+        latest = urlopen("http://live-feeds.cricbuzz.com/CricbuzzFeed?format=xml").read()
+        latest = re.findall("<description>(.+?).&lt", latest)
+        latest = [i.split(',') for i in latest]
+        score['Live Sports Feed'] = latest
+    except:
+        print traceback.format_exc()
+    return score
+
 if __name__ == "__main__":
-    print get_stock_updates()
-    #app.run(debug=True)
+    app.run(debug=True)
+    #print get_weather('chennai')
