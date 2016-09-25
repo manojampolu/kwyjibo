@@ -120,8 +120,9 @@ def get_weather(location):
     try:
         API_URL = "http://www.google.com/ig/api?"
         url = API_URL + urlencode({"weather": location})
-        xml = urlopen(url).read()
-        doc = minidom.parseString(xml)
+        xml = urlopen(url).read().decode('utf-8', 'ignore').strip()
+        print xml
+        doc = minidom.parseString(xml.encode('utf-8'))
         forecast_information = doc.documentElement.getElementsByTagName("forecast_information")[0]
         city = forecast_information.getElementsByTagName("city")[0].getAttribute("data")
 
@@ -159,7 +160,7 @@ def get_gold_price():
     SILVER_URL = "http://www.goldpriceindia.com/silver-price-india.php"
     comm = {'commodities': {"gold":30000, "silver":45000, "usdInr":65}}
     try:
-        goldResp = urlopen(URL).read()
+        goldResp = urlopen(GOLD_URL).read()
         gold = goldResp.split("Today gold price in India is")[1][:15].replace(' ', '').replace('<b>', '').replace('</b>', '')
         usdInr = goldResp.split("US Dollar <i>to Rupee")[1][:15].replace(' ', '').replace('<u>', '').replace('</i>', '').replace('</b>', '')
         silverResp = urlopen(SILVER_URL).read()
@@ -182,5 +183,4 @@ def get_latest_news():
     return news
 
 if __name__ == "__main__":
-    print get_stock_updates()
-    #app.run(debug=True)
+    app.run(debug=True)
