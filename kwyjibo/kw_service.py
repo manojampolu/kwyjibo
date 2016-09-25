@@ -29,14 +29,14 @@ except ImportError:
     from urllib import urlopen, urlencode
     from urllib2 import Request 
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/assets', static_folder='assets')
 app.config["SECRET_KEY"] = 'adivik2000'
 app.config['MONGO_DBNAME'] = "kwyjibo"
 #app.config['MONGO_USERNAME'] = "apache"
 #app.config['MONGO_PASSWORD'] = "apache123"
 app.config['MONGO_HOST'] = "localhost"
 app.config['MONGO_PORT'] = "27017"
-app.config["SESSION_TYPE"] = 'footPryntSession'
+app.config["SESSION_TYPE"] = 'kwyjiboSession'
 CORS(app)
 SESSION_USERID = 'customer'
 #APP_URL = "http://ec2-54-179-145-237.ap-southeast-1.compute.amazonaws.com"
