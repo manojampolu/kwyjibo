@@ -130,7 +130,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="">
       $("#promo-submit").click(function(){
-          $.post("demo_test.asp", function(data, status){
+          $.post("http://ec2-54-169-111-88.ap-southeast-1.compute.amazonaws.com/api/postAd", function(data, status){
               alert("Data: " + data + "\nStatus: " + status);
           });
       });
