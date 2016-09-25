@@ -39,9 +39,8 @@
       <div class="row">
         <div class="col-md-6 col-md-push-3">
           <div class="media-upload">
-            <h2>Upload an Image</h2>
-            <img src="http://placehold.it/1024x512" class="img-responsive">
-            <button type="button" class="btn btn-primary">Select</button>
+            <h2>Fetch the Creative from URL</h2>
+            <input class="form-control" type="url" value="http://vikatan.com" id="ad-image-url">
           </div>
         </div>
       </div>
@@ -54,6 +53,7 @@
             <option>Pan Shops</option>
             <option>Tea Shops</option>
             <option>Super Markets</option>
+            <option>All</option>
           </select>
         </div>
       </div>
@@ -70,10 +70,6 @@
             <option>Adyar</option>
             <option>Besant Nagar</option>
             <option>Kottivakkam</option>
-            <option>Thiruvanmiyur</option>
-            <option>Thiruvanmiyur</option>
-            <option>Thiruvanmiyur</option>
-            <option>Thiruvanmiyur</option>
           </select>
 
         </div>
@@ -92,37 +88,27 @@
       <div class="row">
         <div class="col-md-6 col-md-push-3">
           <h2>Scheduling</h2>
-          <div class="col-md-4">
+          <div class="col-md-6">
             <h3>Start Date</h3>
             <div class="form-group">
-              
-              
-                <input class="form-control" type="date" value="2016-09-24" id="promo-start-date">
-              
+              <input class="form-control" type="date" value="2016-09-24" id="promo-start-date">
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-6">
             <h3>End Date</h3>
             <div class="form-group">
-              
-              
-                <input class="form-control" type="date" value="2016-09-30" id="promo-end-date">
-              
+              <input class="form-control" type="date" value="2016-09-30" id="promo-end-date">
             </div>
-          </div>
-          <div class="col-md-4">
-            <h3>Duration</h3>
-            <span>7 days</span>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-md-6 col-md-push-3">
-          <h2>Pricing</h2>
+          <h2>Bid your ad</h2>
           <div class="form-group row">
-            <label for="example-number-input" class="col-xs-2 col-form-label">CPM</label>
+            <label for="example-number-input" class="col-xs-2 col-form-label">CPM(per 1000 impressions)</label>
             <div class="col-xs-6">
-              <input class="form-control" type="number" value="42" id="example-number-input">
+              <input class="form-control" type="number" value="50" id="cpm-amount">
             </div>
           </div>
           <hr>          
