@@ -8,6 +8,7 @@ serverUrl = 'http://ec2-54-169-111-88.ap-southeast-1.compute.amazonaws.com/api/r
 custId = 1234
 def get_latest_ads():
     resp = {}
+    
     try:
         resp = requests.get(serverUrl, data=json.dumps({'custId': custId, 'city':'Chennai', 'region':'adyar'}))
         resp = json.loads(resp)
