@@ -178,8 +178,8 @@ def get_latest_news():
         latest = urlopen("http://timesofindia.indiatimes.com/rssfeedstopstories.cms").read()
         latest = re.findall("<description>(.+?)</description>", latest)
         news['news']['Top News'] = latest
-        regional = urlopen('http://feeds.feedburner.com/ns7/tamilnadunews?format=xml').read()
-        regional = re.findall("<title>(.+?)</title>", latest)
+        regional = urlopen('http://www.thehindu.com/news/national/tamil-nadu/?service=rss').read()
+        regional = re.findall("<description>(.+?)</description>", latest)
         news['news']['Regional News'] = Regional
     except:
         print traceback.format_exc()
