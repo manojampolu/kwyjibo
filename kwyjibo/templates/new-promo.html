@@ -44,6 +44,9 @@
           </div>
         </div>
       </div>
+      <form>
+        
+      
       <div class="row">
         <div class="col-md-6 col-md-push-3">
           <h2>Targetting</h2>
@@ -112,18 +115,26 @@
             </div>
           </div>
           <hr>          
-          <button type="button" class="btn btn-primary">Select</button>
+          <button type="button" class="btn btn-primary" id="promo-submit">Select</button>
           <br>
           <br>
         </div>
       </div>
-      
+      </form>
 
     </div>
+    
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="">
+      $("#promo-submit").click(function(){
+          $.post("demo_test.asp", function(data, status){
+              alert("Data: " + data + "\nStatus: " + status);
+          });
+      });
+    </script>
   </body>
 </html>
 
