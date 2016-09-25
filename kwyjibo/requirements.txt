@@ -1,0 +1,5 @@
+sudo apt-get build-dep python-pygame
+
+sudo apt-get install mercurial
+
+pip install hg+http://bitbucket.org/pygame/pygame
